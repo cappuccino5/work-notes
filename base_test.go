@@ -7,13 +7,32 @@ import (
 )
 
 
-	var userCards = map[int32]map[int32]int32{0: {
-		 0x03: 1, 0x04: 1, 0x05: 1, 0x14: 1, 0x15: 1,0x16:3,0x17:1,0x18:1,0x19:1,0x25:1,0x26:1,0x27:1,
-	},
-		1: {
-			 0x12: 3, 0x15: 3, 0x16: 3, 0x18: 2, 0x19: 2,0x35:1,
-		},
-		2: {0x23: 3, 0x24: 3, 0x25: 3, 0x26: 2, 0x27: 2, 0x28:1}}
+var Method = make([]int32, 0)
+
+func init(){
+	Method = append(Method, 1, 2, 4, 7)
+}
+
+// 斐波拉契方法
+func GetFloorWay(n int) int32 {
+	if n < 0 {
+		return 0
+	}
+	if n < len(Method) {
+		return Method[n]
+	}
+	return GetFloorWay(n-1) + GetFloorWay(n-2) + GetFloorWay(n-3) + GetFloorWay(n-4)
+}
+
+// 测试斐波拉契 <上楼梯案例>
+func TestFeiBoLaqi(t *testing.T) {
+	var step = 10
+	fmt.Println("method:", Method)
+	for i := 4; i < step; i++ {
+		Method = append(Method, GetFloorWay(i))
+	}
+	fmt.Println("step:", step, "Method:", Method)
+}
 
 
 func TestTradeQueue(t *testing.T) {
